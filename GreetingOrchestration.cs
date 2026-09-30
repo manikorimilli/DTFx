@@ -6,6 +6,10 @@ public class GreetingOrchestration : TaskOrchestration<string, string>
     {
         // Call the GreetActivity
         string greeting = await context.ScheduleTask<string>(typeof(GreetActivity), input);
+
+        // Use for delays (not Thread.Sleep!)
+        await context.CreateTimer(context.CurrentUtcDateTime.AddSeconds(20), true);    
+
         return greeting;
     }
 }
